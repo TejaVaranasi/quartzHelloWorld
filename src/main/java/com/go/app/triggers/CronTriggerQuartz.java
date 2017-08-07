@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class CronTriggerQuartz {
 	public Trigger getCronTriggerRunsEveryFiveSeconds(JobDetail helloJob) {
 		Trigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("dummyTriggerName", "group1")
-				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * 1/1 * ? *")).forJob(helloJob).build();
+				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * 1/1 * ? *")).build();
 		return cronTrigger;
 	}
 
