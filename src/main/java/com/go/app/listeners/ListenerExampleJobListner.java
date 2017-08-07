@@ -36,10 +36,6 @@ public class ListenerExampleJobListner implements JobListener {
 		String jobName = context.getJobDetail().getKey().toString();
 		System.out.println("Job : " + jobName + " is finished...");
 
-		if (!jobException.getMessage().equals("")) {
-			System.out.println("Exception thrown by: " + jobName + " Exception: " + jobException.getMessage());
-		}
-
 	}
 
 }

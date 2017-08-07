@@ -30,9 +30,6 @@ public class HelloJobScheduler {
 	@Autowired
 	private ListenerExampleJobListner listenerExampleJobListner;
 
-	@Autowired
-	private ListenerExampleJob listenerExampleJob;
-
 	@PostConstruct
 	public void initialize() throws SchedulerException {
 
@@ -44,21 +41,24 @@ public class HelloJobScheduler {
 
 	}
 
+	// This method uses CRON trigger to schedule a job
 	public void scheduleListnerExampleJob() throws SchedulerException {
 		JobKey jobKey = new JobKey("ListnerExampleJob", "group2");
 		JobDetail listenerExampleJob = JobBuilder.newJob(ListenerExampleJob.class).withIdentity(jobKey).build();
 		Scheduler scheduler = new StdSchedulerFactory().getScheduler();
 		scheduler.getListenerManager().addJobListener(listenerExampleJobListner, KeyMatcher.keyEquals(jobKey));
 		scheduler.start();
-		scheduler.scheduleJob(listenerExampleJob, simpleTriggerQuartz.getSimpleTriggerRunsEveryFiveSeconds());
+		scheduler.scheduleJob(listenerExampleJob,
+				cronTriggerQuartz.getCronTriggerEveryThirtySecListenerExampleJob(listenerExampleJob));
 	}
 
+	// This method uses SIMPLE trigger to schedule a job
 	public void scheduleHelloJob() {
 		JobDetail helloJob = JobBuilder.newJob(HelloJob.class).withIdentity("dummyJobName", "group1").build();
 		try {
 			Scheduler scheduler = new StdSchedulerFactory().getScheduler();
 			scheduler.start();
-			scheduler.scheduleJob(helloJob, simpleTriggerQuartz.getSimpleTriggerRunsEveryFiveSeconds());
+			scheduler.scheduleJob(helloJob, simpleTriggerQuartz.getSimpleTriggerRunsEveryFiveSeconds(helloJob));
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}
