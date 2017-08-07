@@ -15,11 +15,11 @@ installations required:
 
 After above installtions completes follow below steps:
 
-1)clone this repository in your machine: 
+ 1)clone this repository in your machine: 
   command to clone : git clone https://github.com/TejaVaranasi/quartzHelloWorld.git
-2)import project into eclipse.
+ 2)import project into eclipse.
     File -> import -> existing Maven project -> select specific closed repository in your file system.
-3) Run application:
+ 3) Run application:
     a) Click on green icon which contains text as : Boot Dashboard
     b) Select the project click on run.
  
