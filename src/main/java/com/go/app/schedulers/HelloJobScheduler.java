@@ -20,17 +20,16 @@ public class HelloJobScheduler {
 	@Autowired
 	private SimpleTriggerQuartz simpleTriggerQuartz;
 
-	@Autowired
-	private CronTriggerQuartz cronTriggerQuartz;
+	// @Autowired
+	// private CronTriggerQuartz cronTriggerQuartz;
 
 	@PostConstruct
 	public void initialize() {
-		System.out.println("<-------Inside initialize---------->");
 		JobDetail helloJob = JobBuilder.newJob(HelloJob.class).withIdentity("dummyJobName", "group1").build();
 		try {
 			Scheduler scheduler = new StdSchedulerFactory().getScheduler();
 			scheduler.start();
-			scheduler.scheduleJob(helloJob, cronTriggerQuartz.getCronTriggerRunsEveryFiveSeconds(helloJob));
+			scheduler.scheduleJob(helloJob, simpleTriggerQuartz.getSimpleTriggerRunsEveryFiveSeconds());
 		} catch (SchedulerException e) {
 			e.printStackTrace();
 		}

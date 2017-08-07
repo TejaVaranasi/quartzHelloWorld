@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CronTriggerQuartz {
-	public Trigger getCronTriggerRunsEveryFiveSeconds(JobDetail helloJob) {
+	public Trigger getCronTriggerRunsEveryFiveSeconds() {
+		// Cron trigger which runs every minute
 		Trigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("dummyTriggerName", "group1")
 				.withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * 1/1 * ? *")).build();
 		return cronTrigger;
